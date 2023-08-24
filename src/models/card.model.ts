@@ -29,6 +29,15 @@ class Card {
             this.cvv
         );
     }
+
+    hiddenInformation() {
+        return new Card(
+            this.email,
+            this.card_number,
+            this.expiration_year,
+            this.expiration_month
+        );
+    }
 }
 
 export default Card;

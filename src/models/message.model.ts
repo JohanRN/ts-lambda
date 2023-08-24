@@ -10,7 +10,7 @@ class Message {
     this.data = data;
   }
 
-  async response() {
+  response() {
     const objResponse = {
       statusCode: this.status,
       headers: { 'Content-Type': 'application/json' }, // Configurar el encabezado Content-Type

@@ -1,6 +1,8 @@
+import Card from "models/card.model";
+
 export async function converToObj(data: any) {
-    const obj = JSON.parse(data);
-    delete obj.cvv
+    const e = JSON.parse(data)
+    const obj = new Card(e.email, e.card_number, e.expiration_year, e.expiration_month, e.cvv).hiddenInformation();
     return obj;
 }
 
