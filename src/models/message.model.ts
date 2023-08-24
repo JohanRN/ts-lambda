@@ -13,8 +13,19 @@ class Message {
   response() {
     const objResponse = {
       statusCode: this.status,
-      headers: { 'Content-Type': 'application/json' }, // Configurar el encabezado Content-Type
+      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(this),
+    }
+    return objResponse;
+  }
+  responseToken() {
+    const objResponse = {
+      statusCode: this.status,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        status: this.status,
+        data: this.data
+      }),
     }
     return objResponse;
   }

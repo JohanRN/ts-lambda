@@ -1,24 +1,15 @@
-import Message from "models/message.model";
-import { getCard, registerCard } from "../services/card.services";
-import { CustomError } from "../utils/error-handler.utils";
+import { cardRegistrationController, cardGetController } from '../controllers/card.controllers';
+import { CustomError, UnauthorizedError } from '../utils/error-handler.utils';
 
 export const routeRequest = async (event: any): Promise<any> => {
-    let resultData: any;
-    let statusCode = 0;
-    let message = '';
-    switch (`${event.path}-${event.httpMethod}`) {
-        case '/tokens-POST':
-            resultData = await registerCard(event);
-            statusCode = 200;
-            message = 'Tarjeta registrada';
-            break;
-        case '/gettokens-POST':
-            resultData = await getCard(event);
-            statusCode = resultData ? 200 : 404;
-            message = resultData ? 'Token encontrado' : 'Token no encontrado o expirado';
-            break;
+    if (event.httpMethod !== 'POST') throw new UnauthorizedError('No found');
+    const path = event.path;
+    switch (path) {
+        case '/tokens':
+            return await cardRegistrationController(event);
+        case '/gettokens':
+            return await cardGetController(event);
         default:
-            throw new CustomError(404, 'Ruta de API no válida');
+            throw new CustomError(404, 'Invalid API route');
     }
-    return new Message(statusCode, message, resultData || '').response();
 };

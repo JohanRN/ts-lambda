@@ -1,41 +1,32 @@
-import { converToObj, generateRandomCode } from "../utils/general.utils";
+import { responseObj, generateRandomCode } from "../utils/general.utils";
 import redisClient from "../database/redis.database";
-import Card from "../models/card.model";
-import { NotFoundError } from "../utils/error-handler.utils";
 
-export async function registerCard(event: any) {
+export async function registerCard(creditCard: any) {
     try {
-        if (redisClient.status === 'end') {
-            await redisClient.connect();
-        }
-        const e = JSON.parse(event.body || '{}');
-        const paramCard = new Card(e.email, e.card_number, e.expiration_year, e.expiration_month, e.cvv).response();
+        if (redisClient.status === 'end') await redisClient.connect();
         const uniqueRandomCode = generateRandomCode(16);
-        await redisClient.setex(uniqueRandomCode, 900, JSON.stringify(paramCard));
+        await redisClient.setex(uniqueRandomCode, 900, JSON.stringify(creditCard));
         return uniqueRandomCode
     } catch (error: any) {
-        throw new NotFoundError(error);
+        throw new Error('An internal error occurred.');
     } finally {
-        await redisClient.quit();
+        await redisClient.quit()
     }
-
 }
-
-export async function getCard(event: any) {
+export async function getCard(creditCard: any) {
     try {
-        if (redisClient.status === 'end') {
-            await redisClient.connect();
-        }
-        const e = JSON.parse(event.body || '{}');
-        const resultGetCard = await redisClient.get(e.token);
+        if (redisClient.status === 'end') await redisClient.connect();
+        const resultGetCard = await redisClient.get(creditCard.token);
+        const statusCode = resultGetCard ? 200 : 404;
+        const message = resultGetCard ? 'Token found' : 'Token not found or expired';
         if (resultGetCard) {
-            const result = await converToObj(resultGetCard);
-            return result
+            const result = await responseObj(resultGetCard);
+            return { statusCode: statusCode, message: message, data: result }
         } else {
-            return ''
+            return { statusCode: statusCode, message: message, data: {} }
         }
     } catch (error: any) {
-        throw new NotFoundError(error);
+        throw new Error('An internal error occurred.');
     } finally {
         await redisClient.quit();
     }

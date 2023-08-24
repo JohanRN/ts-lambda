@@ -6,22 +6,12 @@ class CustomError extends Error {
     }
 }
 
-class BadRequestError extends CustomError {
-    constructor(message: string) {
-        super(400, message);
-    }
-}
-
 class UnauthorizedError extends CustomError {
     constructor(message: string) {
         super(401, message);
     }
 }
 
-class NotFoundError extends CustomError {
-    constructor(message: string) {
-        super(404, message);
-    }
-}
 
-export { CustomError, BadRequestError, NotFoundError, UnauthorizedError };
+
+export { CustomError, UnauthorizedError };

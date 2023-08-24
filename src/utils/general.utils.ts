@@ -1,6 +1,6 @@
-import Card from "models/card.model";
+import Card from "../models/card.model";
 
-export async function converToObj(data: any) {
+export async function responseObj(data: any) {
     const e = JSON.parse(data)
     const obj = new Card(e.email, e.card_number, e.expiration_year, e.expiration_month, e.cvv).hiddenInformation();
     return obj;
@@ -18,8 +18,3 @@ export function generateRandomCode(length: number): string {
     return code;
 }
 
-export function isValidApiKey(event: any): boolean {
-    const expectedApiKey = 'Bearer pk_test_LsRb12fdsvdew21';
-    const apiKey = event.headers.Authorization;
-    return apiKey === expectedApiKey;
-}
