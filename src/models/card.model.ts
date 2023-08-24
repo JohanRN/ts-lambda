@@ -1,4 +1,4 @@
-import { schemaToken } from "shema/card.shema";
+import { schemaCard } from "shema/card.shema";
 
 class Card {
     constructor(
@@ -8,19 +8,17 @@ class Card {
         public expiration_month: number,
         public cvv?: string,
     ) {
-        const { error } = schemaToken.validate({
+        const { error } = schemaCard.validate({
             email: this.email,
             card_number: this.card_number,
             cvv: this.cvv,
             expiration_year: this.expiration_year,
             expiration_month: this.expiration_month
         });
-
         if (error) {
             throw new Error('Validation failed: ' + error.details.map((d: any) => d.message).join(', '));
-        }
+        };
     }
-
     return() {
         return new Card(
             this.email,

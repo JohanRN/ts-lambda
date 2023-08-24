@@ -6,3 +6,21 @@
 3. Para ejecutar el proyecto, simplemente escribe npm run dev.
 
 4. Si deseas ejecutar las pruebas con Jest, utiliza el comando npm test.
+
+curl --location 'http://localhost:3000/dev/tokens' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer pk_test_LsRb12fdsvdew21' \
+--data-raw '{
+"email": "jose.corzo@gmail.com",
+"card_number": "4214556170098862",
+"cvv": "123",
+"expiration_year":"2024",
+"expiration_month":"07"
+}'
+
+curl --location 'http://localhost:3000/dev/gettokens' \
+--header 'Content-Type: application/json' \
+--header 'Authorization: Bearer pk_test_LsRb12fdsvdew21' \
+--data '{
+"token":"DMOZPhWdXgExJO4j"
+}'

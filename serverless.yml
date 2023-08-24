@@ -5,18 +5,16 @@ provider:
   runtime: nodejs18.x
 
 functions:
-  settokens:
-    handler: src/handler/set-card.handler
+  cardhandler:
+    handler: src/handler/card-handler.handler
     events:
       - http:
           path: /tokens
           method: post
-  gettokens:
-    handler: src/handler/get-card.handler
-    events:
       - http:
           path: /gettokens
           method: post
+
 custom:
   esbuild:
     bundle: true

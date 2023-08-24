@@ -10,7 +10,7 @@ const customEmailValidator = (value: string, helpers: Joi.CustomHelpers) => {
     return value;
 };
 
-export const schemaToken = Joi.object({
+export const schemaCard = Joi.object({
     email: Joi.string()
         .email({ minDomainSegments: 2, tlds: { allow: ['com', 'es'] } })
         .custom(customEmailValidator)
