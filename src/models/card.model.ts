@@ -1,3 +1,4 @@
+import { NotFoundError } from "utils/error-handler.utils";
 import { schemaCard } from "../shema/card.shema";
 
 class Card {
@@ -16,7 +17,7 @@ class Card {
             expiration_month: this.expiration_month
         });
         if (error) {
-            throw new Error('Validation failed: ' + error.details.map((d: any) => d.message).join(', '));
+            throw new NotFoundError('Validation failed: ' + error.details.map((d: any) => d.message).join(', '));
         };
     }
     return() {

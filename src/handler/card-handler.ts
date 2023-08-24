@@ -1,6 +1,6 @@
 import { getCard, registerCard } from "../services/card.services";
 import Message from "../models/message.model";
-import { CustomError, UnauthorizedError } from "../utils/errorHandler.utils";
+import { CustomError, UnauthorizedError } from "../utils/error-handler.utils";
 import { isValidApiKey } from "utils/general.utils";
 
 export const handler = async (event: any): Promise<any> => {
