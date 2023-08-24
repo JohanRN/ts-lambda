@@ -20,7 +20,7 @@ class Card {
             throw new NotFoundError('Validation failed: ' + error.details.map((d: any) => d.message).join(', '));
         };
     }
-    return() {
+    response() {
         return new Card(
             this.email,
             this.card_number,

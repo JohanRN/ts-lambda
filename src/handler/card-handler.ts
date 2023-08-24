@@ -1,7 +1,7 @@
 import { getCard, registerCard } from "../services/card.services";
 import Message from "../models/message.model";
 import { CustomError, UnauthorizedError } from "../utils/error-handler.utils";
-import { isValidApiKey } from "utils/general.utils";
+import { isValidApiKey } from "../utils/general.utils";
 
 export const handler = async (event: any): Promise<any> => {
   try {
@@ -27,7 +27,7 @@ export const handler = async (event: any): Promise<any> => {
         message = resultData ? 'Token encontrado' : 'Token no encontrado o expirado';
         break;
       default:
-        throw new CustomError(400, 'Ruta de API no válida');
+        throw new CustomError(404, 'Ruta de API no válida');
     }
 
     return new Message(statusCode, message, resultData || '').response();
