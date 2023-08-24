@@ -1,3 +1,5 @@
+# Proyecto Lambda en TypeScript
+
 1. Ejecuta npm install.
 
 2. Para instalar Redis, debes tener previamente instalado Docker. Ejecuta el siguiente comando para iniciar un contenedor de Redis:
