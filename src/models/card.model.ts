@@ -1,4 +1,4 @@
-import { schemaCard } from "shema/card.shema";
+import { schemaCard } from "../shema/card.shema";
 
 class Card {
     constructor(
