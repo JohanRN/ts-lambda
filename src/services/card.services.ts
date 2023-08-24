@@ -1,8 +1,7 @@
+import { converToObj, generateRandomCode } from "utils/general.utils";
 import redisClient from "../database/redis.database";
 import Card from "../models/card.model";
-import { generateRandomCode } from "../utils/generate-code.utils";
-import { converToObj } from "../utils/convert-obj.utils";
-import { NotFoundError } from "../utils/errorHandler";
+import { NotFoundError } from "../utils/errorHandler.utils";
 
 export async function registerCard(event: any) {
     try {
