@@ -2,8 +2,6 @@
 
 Back End
 
-0. cd ts-lambda
-
 1. Ejecuta npm install.
 
 2. Para instalar Redis, debes tener previamente instalado Docker. Ejecuta el siguiente comando para iniciar un contenedor de Redis:
@@ -30,11 +28,3 @@ curl --location 'http://localhost:3000/dev/gettokens' \
 --data '{
 "token":"DMOZPhWdXgExJO4j"
 }'
-
-Front End
-
-0. cd vuejs
-
-1. Ejecuta npm install.
-
-2. npm run serve.
